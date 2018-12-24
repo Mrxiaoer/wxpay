@@ -5,7 +5,6 @@ import net.xdclass.xdvideo.domain.UserEntity;
 import net.xdclass.xdvideo.mapper.UserMapper;
 import net.xdclass.xdvideo.service.UserService;
 import net.xdclass.xdvideo.utils.HttpUtils;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

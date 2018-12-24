@@ -1,7 +1,6 @@
 package net.xdclass.xdvideo.service;
 
 import net.xdclass.xdvideo.domain.UserEntity;
-import org.apache.catalina.User;
 
 /**
  * user业务接口类
