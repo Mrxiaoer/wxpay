@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.xdvideo.mapper.VideoMapper">
+    <resultMap id="Base_ResultMap" type="net.xdclass.xdvideo.domain.VideoEntity">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="summary" property="summary"/>
+        <result column="cover_img" property="coverImg"/>
+        <result column="view_num" property="viewNum"/>
+        <result column="price" property="price"/>
+        <result column="create_time" property="createTime"/>
+        <result column="online" property="online"/>
+        <result column="point" property="point"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,title,summary,cover_img,view_num,price,create_time,online,point
+    </sql>
+
+    <select id="queryAll" resultMap="Base_ResultMap">
+        select * from video
+    </select>
+
+    <select id="queryOne" resultMap="Base_ResultMap">
+        select
+        *
+        from `video`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="title != null">
+                `title` = #{title} and
+            </if>
+            <if test="summary != null and summary!=''">
+                `summary` = #{summary} and
+            </if>
+            <if test="coverImg != null and coverImg!=''">
+                `cover_img` = #{coverImg} and
+            </if>
+            <if test="viewNum != null and viewNum!=''">
+                `view_num` = #{viewNum} and
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <update id="updateOne">
+        UPDATE `video`
+        SET
+        <trim suffixOverrides=",">
+            <if test="title != null and title != null">
+                `title` = #{title},
+            </if>
+            <if test="summary != null and summary!=''">
+                `summary` = #{summary},
+            </if>
+            <if test="coverImg != null and coverImg!=''">
+                `cover_img` = #{coverImg},
+            </if>
+            <if test="viewNum != null and viewNum!=''">
+                `view_num` = #{viewNum},
+            </if>
+            <if test="price != null and price!=''">
+                `price` = #{price},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="online != null">
+                `online` = #{online},
+            </if>
+            <if test="point != null">
+                `point` = #{point},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `video`
+        (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="title != null and title != ''">
+                `title`,
+            </if>
+            <if test="summary != null and summary != ''">
+                `summary`,
+            </if>
+            <if test="coverImg !=null and coverImg != ''">
+                `cover_img`,
+            </if>
+            <if test="viewNum!=null">
+                `view_num`,
+            </if>
+            <if test="price != null">
+                `price`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+            <if test="online != null">
+                `online`,
+            </if>
+            <if test="point != null">
+                `point`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="title != null and title != ''">
+                #{title},
+            </if>
+            <if test="summary != null and summary != ''">
+                #{summary},
+            </if>
+            <if test="coverImg != null and coverImg != ''">
+                #{coverImg},
+            </if>
+            <if test="viewNum!=null">
+                #{viewNum},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="online != null">
+                #{online},
+            </if>
+            <if test="point != null">
+                #{point},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+</mapper>

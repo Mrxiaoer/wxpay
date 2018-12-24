@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.xdvideo.mapper.ChapterMapper">
+    <resultMap id="Base_ResultMap" type="net.xdclass.xdvideo.domain.ChapterEntity">
+        <id column="id" property="id"/>
+        <result column="video_id" property="videoId"/>
+        <result column="title" property="title"/>
+        <result column="ordered" property="ordered"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,video_id,title,ordered,create_time
+    </sql>
+
+    <!-- 查询一条数据 -->
+    <select id="queryOne" resultMap="Base_ResultMap">
+        select
+        *
+        from `chapter`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="videoId != null">
+                `video_id` = #{videoId} and
+            </if>
+            <if test="title != null and title != ''">
+                `title` = #{title} and
+            </if>
+            <if test="ordered != null">
+                `ordered` = #{ordered} and
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <update id="updateOne">
+        UPDATE `chapter`
+        SET
+        <trim suffixOverrides=",">
+            <if test="videoId != null">
+                `video_id` = #{videoId},
+            </if>
+            <if test="title != null and title != null">
+                `title` = #{title},
+            </if>
+            <if test="ordered != null">
+                `ordered` = #{ordered},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `chapter`
+        (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="videoId != null">
+                `video_id`,
+            </if>
+            <if test="title !=null and title != ''">
+                `title`,
+            </if>
+            <if test="ordered!=null">
+                `ordered`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="videoId != null">
+                #{videoId},
+            </if>
+            <if test="title != null and title != ''">
+                #{title},
+            </if>
+            <if test="ordered != null">
+                #{ordered},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+</mapper>

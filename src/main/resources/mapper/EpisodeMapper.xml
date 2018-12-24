@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.xdvideo.mapper.EpisodeMapper">
+    <resultMap id="Base_ResultMap" type="net.xdclass.xdvideo.domain.EpisodeEntity">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="num" property="num"/>
+        <result column="duration" property="duration"/>
+        <result column="cover_img" property="coverImg"/>
+        <result column="video_id" property="videoId"/>
+        <result column="summary" property="summary"/>
+        <result column="create_time" property="createTime"/>
+        <result column="chapter_id" property="chapterId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,num,duration,cover_img,video_id,summary,create_time,chapter_id
+    </sql>
+
+    <!-- 查询一条数据 -->
+    <select id="queryOne" resultMap="Base_ResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `episode`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="title != null and title != ''">
+                `title` = #{title} and
+            </if>
+            <if test="num != null">
+                `num` = #{num} and
+            </if>
+            <if test="duration != null and duration !=''">
+                `duration` = #{duration} and
+            </if>
+            <if test="coverImg != null and coverImg !=''">
+                `cover_img` = #{coverImg} and
+            </if>
+            <if test="videoId != null">
+                `video_id` = #{videoId} and
+            </if>
+            <if test="summary != null and summary!=''">
+                `summary` = #{summary} and
+            </if>
+            <if test="chapterId != null ">
+                `chapter_id` = #{chapterId} and
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <update id="updateOne">
+        UPDATE `episode`
+        SET
+        <trim suffixOverrides=",">
+            <if test="title != null and title != null">
+                `title` = #{title},
+            </if>
+            <if test="num != null">
+                `num` = #{num},
+            </if>
+            <if test="duration != null and duration!=''">
+                `duration` = #{duration},
+            </if>
+            <if test="coverImg != null and coverImg!=''">
+                `cover_img` = #{coverImg},
+            </if>
+            <if test="videoId != null">
+                `video_id` = #{videoId},
+            </if>
+            <if test="summary != null">
+                `summary` = #{summary},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="chapterId != null">
+                `chapter_id` = #{chapterId},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `id` = #{id} and
+        </trim>
+    </update>
+
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `episode`
+        (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="title != null and title != ''">
+                `title`,
+            </if>
+            <if test="num != null">
+                `num`,
+            </if>
+            <if test="duration !=null and duration != ''">
+                `duration`,
+            </if>
+            <if test="coverImg!=null and coverImg != ''">
+                `cover_img`,
+            </if>
+            <if test="videoId != null">
+                `video_id`,
+            </if>
+            <if test="summary != null and summary != ''">
+                `summary`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+            <if test="chapterId != null">
+                `chapter_id`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="title != null and title != ''">
+                #{title},
+            </if>
+            <if test="num != null">
+                #{num},
+            </if>
+            <if test="duration != null and duration != ''">
+                #{duration},
+            </if>
+            <if test="coverImg != null">
+                #{coverImg},
+            </if>
+            <if test="videoId != null">
+                #{videoId},
+            </if>
+            <if test="summary != null">
+                #{summary},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="chapterId != null">
+                #{chapterId},
+            </if>
+        </trim>
+        )
+    </insert>
+
+</mapper>
